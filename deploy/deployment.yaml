@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prommysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prommysql
+  template:
+    metadata:
+      labels:
+        app: prommysql
+    spec:
+      containers:
+        - name: prommysql
+          image: your-docker-username/prommysql:latest  # Replace with your Docker image name and tag
+          env:
+            - name: MYSQL_USERNAME
+              value: your_username
+            - name: MYSQL_PASSWORD
+              value: your_password
+            - name: MYSQL_HOST
+              value: your_host
+            - name: MYSQL_PORT
+              value: "your_port"
+            - name: MYSQL_DB_NAME
+              value: your_db_name
+            - name: SLEEP_INTERVAL_MILLISECOND
+              value: "1000"  # Replace with your desired sleep interval
+          ports:
+            - containerPort: 8080

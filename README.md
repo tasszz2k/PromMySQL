@@ -69,6 +69,46 @@ PromMySQL is a **simple Golang application** designed for continuous data push i
 This Dockerfile assumes that your Golang application uses environment variables for MySQL configuration,
 as indicated by your Golang code. Make sure to customize the environment variables accordingly.
 
+### Kubernetes
+
+1. **Applying the Manifests:**
+
+Apply the deployment and service:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+2. **Checking the Status:**
+
+Check the status of your deployment:
+
+```bash
+kubectl get deployments
+kubectl get pods
+```
+
+Check the status of your service:
+
+```bash
+kubectl get services
+```
+
+3. **Accessing Your Application:**
+
+If you've used `LoadBalancer` type, wait until the external IP is assigned:
+
+```bash
+kubectl get services -w
+```
+
+Once you have the external IP, you can access your application using that IP.
+
+If you've used `NodePort` or `ClusterIP`, you'll need to access the application through the respective Node IP or Cluster IP and the assigned port.
+
+Remember to replace placeholder values with your actual configuration
+
 ### Usage
 
 The application continuously pushes data into MySQL and exposes Prometheus metrics at `http://localhost:8080/metrics`.
