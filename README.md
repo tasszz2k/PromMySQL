@@ -44,6 +44,31 @@ PromMySQL is a **simple Golang application** designed for continuous data push i
    go run main.go
    ```
 
+### Docker
+
+1. **Build the Docker image:**
+
+   Open a terminal in the directory where your Dockerfile is located and run:
+
+   ```bash
+   docker build -t prommysql .
+   ```
+
+2. **Run the Docker container:**
+
+   ```bash
+   docker run -p 8080:8080 -e MYSQL_USERNAME=<your_username> -e MYSQL_PASSWORD=<your_password> -e MYSQL_HOST=<your_host> -e MYSQL_PORT=<your_port> -e MYSQL_DB_NAME=<your_db_name> -e SLEEP_INTERVAL_MILLISECOND=<your_sleep_interval> prommysql
+   ```
+
+   Replace `<your_username>`, `<your_password>`, `<your_host>`, `<your_port>`,
+   `<your_db_name>`, and `<your_sleep_interval>` with your actual MySQL configuration.
+
+   This command maps port 8080 from the container to port 8080 on your host machine
+   and sets the necessary environment variables.
+
+This Dockerfile assumes that your Golang application uses environment variables for MySQL configuration,
+as indicated by your Golang code. Make sure to customize the environment variables accordingly.
+
 ### Usage
 
 The application continuously pushes data into MySQL and exposes Prometheus metrics at `http://localhost:8080/metrics`.

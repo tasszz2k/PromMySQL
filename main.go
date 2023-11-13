@@ -7,20 +7,22 @@ import (
 	"net/http"
 	"time"
 
+	"PromMySQL/utils"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const (
+var (
 	// MySQL's connection details
-	dbHost     = "host"
-	dbPort     = 3306
-	dbUsername = "username"
-	dbPassword = "password"
-	dbName     = "database_name"
+	dbHost     = utils.GetEnvOrDefaultString("MYSQL_HOST", "127.0.0.1")
+	dbPort     = utils.GetEnvOrDefaultInt("MYSQL_PORT", 3306)
+	dbUsername = utils.GetEnvOrDefaultString("MYSQL_USERNAME", "username")
+	dbPassword = utils.GetEnvOrDefaultString("MYSQL_PASSWORD", "password")
+	dbName     = utils.GetEnvOrDefaultString("MYSQL_DB_NAME", "test_db")
 
-	sleepIntervalSecond = 1
+	sleepIntervalMillisecond = utils.GetEnvOrDefaultInt("SLEEP_INTERVAL_MILLISECOND", 1000)
 )
 
 var (
@@ -120,7 +122,7 @@ func main() {
 		}
 
 		// Sleep for a defined interval (e.g., 1 second)
-		time.Sleep(sleepIntervalSecond * time.Second)
+		time.Sleep(time.Duration(sleepIntervalMillisecond) * time.Millisecond)
 	}
 }
 
