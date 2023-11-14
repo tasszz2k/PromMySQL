@@ -2,6 +2,8 @@
 
 PromMySQL is a **simple Golang application** designed for continuous data push into MySQL while exporting key metrics to Prometheus. This project is particularly useful for scenarios where seamless data migration with minimal downtime is crucial.
 
+![img.png](docs/screenshot.png)
+
 ## Features
 
 - **Continuous Data Push:** The application maintains an infinite loop, pushing data into MySQL at regular intervals.

@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations: {}
+  labels:
+    app: kube-prometheus-stack-prom-mysql-exporter
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 41.6.1
+    chart: kube-prometheus-stack-41.6.1
+    heritage: Helm
+    release: prometheus
+  name: kube-prometheus-stack-prom-mysql
+  namespace: monitoring
+spec:
+  endpoints:
+    - interval: 30s
+      path: "/metrics"
+      port: prometheus
+      scrapeTimeout: 30s
+  jobLabel: jobLabel
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      app: prom-mysql
+      release: kube-prometheus-stack
+      self-monitor: 'true'

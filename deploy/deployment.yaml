@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prommysql-deployment
+  name: prom-mysql-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prommysql
+      app: prom-mysql
   template:
     metadata:
       labels:
-        app: prommysql
+        app: prom-mysql
     spec:
       containers:
         - name: prommysql
@@ -30,3 +30,5 @@ spec:
               value: "1000"  # Replace with your desired sleep interval
           ports:
             - containerPort: 8080
+              protocol: TCP
+              name: prometheus
